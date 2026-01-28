@@ -87,7 +87,7 @@ async function main() {
           text: '这是一封纯文本邮件内容',           // 纯文本
           html: `<h1>今天是：${date}</h1><p>VIP到期时间：${vip_details.data.busi_vip[0].vip_end_time}</p>`
         };
-        send163Email(mailOptions);
+        await send163Email(mailOptions);
       } else {
         printRed("获取失败\n")
         errorMsg[userDetail?.data?.nickname + " vip_details"] = vip_details
