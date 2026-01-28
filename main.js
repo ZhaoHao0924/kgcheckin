@@ -1,5 +1,6 @@
 import { printBlue, printGreen, printMagenta, printRed, printYellow } from "./utils/colorOut.js";
 import { close_api, delay, send, startService } from "./utils/utils.js";
+import { send163Email } from "./mailUtils.js"
 
 async function main() {
 
@@ -78,6 +79,15 @@ async function main() {
       if (vip_details.status === 1) {
         printBlue(`今天是：${date}`)
         printBlue(`VIP到期时间：${vip_details.data.busi_vip[0].vip_end_time}\n`)
+        // 邮件内容
+        const mailOptions = {
+          from: '"github action" <zh155329471280@163.com>',  // 发件人
+          to: '568972743@qq.com',             // 收件人
+          subject: '酷狗概念版签到通知',         // 主题
+          text: '这是一封纯文本邮件内容',           // 纯文本
+          html: `<h1>今天是：${date}</h1><p>VIP到期时间：${vip_details.data.busi_vip[0].vip_end_time}</p>`
+        };
+        send163Email(mailOptions);
       } else {
         printRed("获取失败\n")
         errorMsg[userDetail?.data?.nickname + " vip_details"] = vip_details
