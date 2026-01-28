@@ -26,7 +26,6 @@ jobs:
             ${{ runner.os }}-node-
       - name: 安装依赖
         run: npm run install && npm install nodemailer
-        if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
       - name: 签到
         run: npm run main
         env:
